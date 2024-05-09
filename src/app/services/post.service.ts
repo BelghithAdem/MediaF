@@ -4,7 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { User } from '../interfaces/user';
+import { User } from '../models/user';
 import { CommentResponse } from '../models/comment-response';
 import { UserModel } from '../models/user.model';
 
@@ -77,6 +77,8 @@ export class PostService {
 
   
   getPostLikes(postId: number, page: number, size: number): Observable<UserModel[] | HttpErrorResponse> {
+    console.log('Attempting to load post likes...');
+
     const headers = this.getHeaders().headers;
     const reqParams = new HttpParams()
       .set('page', String(page))

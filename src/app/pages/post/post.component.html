@@ -10,7 +10,10 @@
                 <img class="rounded-full h-8 w-8 mr-2 mt-1" [src]="postData.user.photoProfile ? 'http://localhost:8081/api/posts/image/' + postData.user.photoProfile : 'https://picsum.photos/id/1027/200/200'" />
 
                 <div class="flex flex-col">
-                  <b class="mb-2 capitalize"> {{ postData.user.nom }}</b>
+                  <a [routerLink]="['/profile', postData.user.id]" class="mb-2 capitalize">
+                    <b class="mb-2 capitalize">{{ postData.user.nom }}</b>
+                </a>
+
                   <time datetime="06-08-21" class="text-gray-400 text-xs">06 August at 09.15 PM
                   </time>
                 </div>
@@ -55,43 +58,19 @@
                   </svg>
                   <div class="text-sm	">{{ postData.commentCount }} <button (click)="toggleMenu2()">Comments</button> </div>
                 </div>
-                <div *ngIf="isMenuOpen2" style=" right:400px;" class="absolute origin-top-right menu mt-16 z-10 w-80 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                  <!-- Active: "bg-gray-100", Not Active: "" -->
-                  <div *ngFor="let comment of postComments" class="text-black p-4 antialiased flex">
-                    <img class="rounded-full h-8 w-8 mr-2 mt-1" [src]="comment.comment.author.photoProfile ? 'http://localhost:8081/api/posts/image/' + comment.comment.author.photoProfile : 'https://picsum.photos/id/1027/200/200'" />
-                    <div>
-                        <div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5">
-                            <div class="font-semibold text-sm leading-relaxed">{{ comment.comment.author.nom }}</div>
-                            <div class="text-xs leading-snug md:leading-normal">{{ comment.comment.content}}</div>
-                        </div>
-                        <div class="text-xs  mt-0.5 text-gray-500">14 w</div>
-                        <div class="bg-white border border-white rounded-full float-right -mt-8 mr-0.5 flex shadow items-center ">
-                            <svg class="p-0.5 h-5 w-5 rounded-full z-20 bg-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16"><defs><linearGradient id="a1" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#18AFFF"></stop><stop offset="100%" stop-color="#0062DF"></stop></linearGradient><filter id="c1" width="118.8%" height="118.8%" x="-9.4%" y="-9.4%" filterUnits="objectBoundingBox"><feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1"></feGaussianBlur><feOffset dy="-1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset><feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"></feComposite><feColorMatrix in="shadowInnerInner1" values="0 0 0 0 0 0 0 0 0 0.299356041 0 0 0 0 0.681187726 0 0 0 0.3495684 0"></feColorMatrix></filter><path id="b1" d="M8 0a8 8 0 00-8 8 8 8 0 1016 0 8 8 0 00-8-8z"></path></defs><g fill="none"><use fill="url(#a1)" xlink:href="#b1"></use><use fill="black" filter="url(#c1)" xlink:href="#b1"></use><path fill="white" d="M12.162 7.338c.176.123.338.245.338.674 0 .43-.229.604-.474.725a.73.73 0 01.089.546c-.077.344-.392.611-.672.69.121.194.159.385.015.62-.185.295-.346.407-1.058.407H7.5c-.988 0-1.5-.546-1.5-1V7.665c0-1.23 1.467-2.275 1.467-3.13L7.361 3.47c-.005-.065.008-.224.058-.27.08-.079.301-.2.635-.2.218 0 .363.041.534.123.581.277.732.978.732 1.542 0 .271-.414 1.083-.47 1.364 0 0 .867-.192 1.879-.199 1.061-.006 1.749.19 1.749.842 0 .261-.219.523-.316.666zM3.6 7h.8a.6.6 0 01.6.6v3.8a.6.6 0 01-.6.6h-.8a.6.6 0 01-.6-.6V7.6a.6.6 0 01.6-.6z"></path></g></svg>
-                            <svg class="p-0.5 h-5 w-5 rounded-full -ml-1.5 bg-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16"><defs><linearGradient id="a2" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#FF6680"></stop><stop offset="100%" stop-color="#E61739"></stop></linearGradient><filter id="c2" width="118.8%" height="118.8%" x="-9.4%" y="-9.4%" filterUnits="objectBoundingBox"><feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1"></feGaussianBlur><feOffset dy="-1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset><feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"></feComposite><feColorMatrix in="shadowInnerInner1" values="0 0 0 0 0.710144928 0 0 0 0 0 0 0 0 0 0.117780134 0 0 0 0.349786932 0"></feColorMatrix></filter><path id="b2" d="M8 0a8 8 0 100 16A8 8 0 008 0z"></path></defs><g fill="none"><use fill="url(#a2)" xlink:href="#b2"></use><use fill="black" filter="url(#c2)" xlink:href="#b2"></use><path fill="white" d="M10.473 4C8.275 4 8 5.824 8 5.824S7.726 4 5.528 4c-2.114 0-2.73 2.222-2.472 3.41C3.736 10.55 8 12.75 8 12.75s4.265-2.2 4.945-5.34c.257-1.188-.36-3.41-2.472-3.41"></path></g></svg>
-                            <span class="text-sm ml-1 pr-1.5 text-gray-500">3</span>
-                        </div>
-                    </div>
-                </div>
-                       </div>
+              
                 <div class="flex items-center	gap-3">
                   
                   <div class="h-16 border-b flex items-center justify-around ">
-                    <button (click)="toggleMenu1()"  class=" mr-3 flex items-center gap-1">
+                    <button (click)="toggleMenu1()"  class=" mr-4 flex items-center gap-1">
                     
-                      <span><u>Likes</u></span>
-                    </button>
-                    <div *ngIf="isMenuOpen1" style="right:350px;" class="absolute menu mt-16 z-10 w-48 rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                      <!-- Active: "bg-gray-100", Not Active: "" -->
-                      <a *ngFor="let like of postLikes" class="block px-4 py-2 text-sm text-gray-700 flex items-center" role="menuitem" tabindex="-1" id="user-menu-item-1">
-                        <img class="rounded-full h-8 w-8 mr-2 mt-1" [src]="like.photoProfile ? 'http://localhost:8081/api/posts/image/' + like.photoProfile : 'https://picsum.photos/id/1027/200/200'" />
-                        <span>{{ like.nom }} {{ like.prenom }}</span>
-                      </a>
-                    </div>
-                    
-                    <button (click)="likeOrUnlikePost()" [ngClass]="{'liked': likedByAuthUser}" class="flex items-center gap-1">
                       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
                       </svg>
+                    </button>
+                  
+                    <button (click)="likeOrUnlikePost()" [disabled]="!userData" [class.liked]="likedByAuthUser" class="flex items-center gap-1">
+                    
                       <span>{{ postData.likeCount }} {{ likedByAuthUser ? 'Unlike' : 'Like' }}</span>
                     </button>
                
@@ -140,4 +119,69 @@
 
 
 
-          
+<!-- Formulaire de modification -->
+<!-- Formulaire de modification -->
+<div *ngIf="isMenuOpen2" class="fixed inset-0 bg-gray-500 bg-opacity-50 z-20 flex items-center justify-center mt-16">
+  <div class="absolute inset-0 backdrop-filter backdrop-blur-md"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="mx-auto w-full max-w-[550px] bg-white rounded-lg overflow-hidden ">
+      <div class="overflow-y-auto max-h-[500px]" id="commentContainer"> <!-- Ajout de la classe overflow-y-auto et max-h-[400px] -->
+        <!-- Contenu du formulaire de modification -->
+        <!-- Bouton de fermeture -->
+        <button (click)="closeSettings()" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <div *ngFor="let comment of allPostComments" class="mt-4 mb-4 text-black p-4 antialiased flex"> <!-- Ajout des classes mt-4 et mb-4 pour la marge supérieure et inférieure -->
+          <img class="rounded-full h-8 w-8 mr-2 mt-1" [src]="comment.comment.author.photoProfile ? 'http://localhost:8081/api/posts/image/' + comment.comment.author.photoProfile : 'https://picsum.photos/id/1027/200/200'" />
+          <div>
+            <div class="bg-gray-100 rounded-lg px-4 pt-2 pb-2.5">
+              <div class="font-semibold text-sm leading-relaxed">{{ comment.comment.author.nom }}</div>
+              <div class="text-xs leading-snug md:leading-normal">{{ comment.comment.content}}</div>
+            </div>
+            <div class="text-xs  mt-0.5 text-gray-500">14 w</div>
+            <div class="bg-white border border-white rounded-full float-right -mt-8 mr-0.5 flex shadow items-center ">
+              <svg class="p-0.5 h-5 w-5 rounded-full z-20 bg-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16"><defs><linearGradient id="a1" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#18AFFF"></stop><stop offset="100%" stop-color="#0062DF"></stop></linearGradient><filter id="c1" width="118.8%" height="118.8%" x="-9.4%" y="-9.4%" filterUnits="objectBoundingBox"><feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1"></feGaussianBlur><feOffset dy="-1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset><feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"></feComposite><feColorMatrix in="shadowInnerInner1" values="0 0 0 0 0 0 0 0 0 0.299356041 0 0 0 0 0.681187726 0 0 0 0.3495684 0"></feColorMatrix></filter><path id="b1" d="M8 0a8 8 0 00-8 8 8 8 0 1016 0 8 8 0 00-8-8z"></path></defs><g fill="none"><use fill="url(#a1)" xlink:href="#b1"></use><use fill="black" filter="url(#c1)" xlink:href="#b1"></use><path fill="white" d="M12.162 7.338c.176.123.338.245.338.674 0 .43-.229.604-.474.725a.73.73 0 01.089.546c-.077.344-.392.611-.672.69.121.194.159.385.015.62-.185.295-.346.407-1.058.407H7.5c-.988 0-1.5-.546-1.5-1V7.665c0-1.23 1.467-2.275 1.467-3.13L7.361 3.47c-.005-.065.008-.224.058-.27.08-.079.301-.2.635-.2.218 0 .363.041.534.123.581.277.732.978.732 1.542 0 .271-.414 1.083-.47 1.364 0 0 .867-.192 1.879-.199 1.061-.006 1.749.19 1.749.842 0 .261-.219.523-.316.666zM3.6 7h.8a.6.6 0 01.6.6v3.8a.6.6 0 01-.6.6h-.8a.6.6 0 01-.6-.6V7.6a.6.6 0 01.6-.6z"></path></g></svg>
+              <svg class="p-0.5 h-5 w-5 rounded-full -ml-1.5 bg-white" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 16 16"><defs><linearGradient id="a2" x1="50%" x2="50%" y1="0%" y2="100%"><stop offset="0%" stop-color="#FF6680"></stop><stop offset="100%" stop-color="#E61739"></stop></linearGradient><filter id="c2" width="118.8%" height="118.8%" x="-9.4%" y="-9.4%" filterUnits="objectBoundingBox"><feGaussianBlur in="SourceAlpha" result="shadowBlurInner1" stdDeviation="1"></feGaussianBlur><feOffset dy="-1" in="shadowBlurInner1" result="shadowOffsetInner1"></feOffset><feComposite in="shadowOffsetInner1" in2="SourceAlpha" k2="-1" k3="1" operator="arithmetic" result="shadowInnerInner1"></feComposite><feColorMatrix in="shadowInnerInner1" values="0 0 0 0 0.710144928 0 0 0 0 0 0 0 0 0 0.117780134 0 0 0 0.349786932 0"></feColorMatrix></filter><path id="b2" d="M8 0a8 8 0 100 16A8 8 0 008 0z"></path></defs><g fill="none"><use fill="url(#a2)" xlink:href="#b2"></use><use fill="black" filter="url(#c2)" xlink:href="#b2"></use><path fill="white" d="M10.473 4C8.275 4 8 5.824 8 5.824S7.726 4 5.528 4c-2.114 0-2.73 2.222-2.472 3.41C3.736 10.55 8 12.75 8 12.75s4.265-2.2 4.945-5.34c.257-1.188-.36-3.41-2.472-3.41"></path></g></svg>
+              <span class="text-sm ml-1 pr-1.5 text-gray-500">3</span>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+      <div class="flex items-center justify-between mt-4 p-4 ">
+        <img class="rounded-full h-8 w-8 mr-2 mt-1" [src]="postData.user.photoProfile ? 'http://localhost:8081/api/posts/image/' + postData.user.photoProfile : 'https://picsum.photos/id/1027/200/200'" />
+        <div class="flex items-center bg-gray-50 h-11 w-11/12 border rounded-2xl overflow-hidden px-4">
+          <input type="text" class="h-full w-full bg-gray-50 outline-none" placeholder="Write your comment..." name="comment" [(ngModel)]="commentText">
+        </div>
+        <button (click)="addComment()" class="flex ml-1 items-center py-2 px-4 rounded-lg text-sm bg-blue-600 text-white shadow-lg">
+          <svg class="ml-1" viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"></line>
+              <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Formulaire de modification -->
+<div *ngIf="isMenuOpen1" class="fixed inset-0 bg-gray-500 bg-opacity-50 z-20 flex items-center justify-center mt-16">
+  <div class="absolute inset-0 backdrop-filter backdrop-blur-md"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="mx-auto w-full max-w-[550px] bg-white rounded-lg overflow-hidden ">
+      <div class="overflow-y-auto max-h-[500px]"> <!-- Ajout de la classe overflow-y-auto et max-h-[500px] -->
+        <!-- Contenu du formulaire de modification -->
+        <!-- Bouton de fermeture -->
+        <button (click)="closeSettings()" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 cursor-pointer">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+        </button>
+        <a *ngFor="let like of postLikes" class="block px-4 py-2 text-sm text-gray-700 flex items-center" role="menuitem" tabindex="-1" id="user-menu-item-1">
+          <img class="rounded-full h-8 w-8 mr-2 mt-1" [src]="like.photoProfile ? 'http://localhost:8081/api/posts/image/' + like.photoProfile : 'https://picsum.photos/id/1027/200/200'" />
+          <span>{{ like.nom }} {{ like.prenom }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

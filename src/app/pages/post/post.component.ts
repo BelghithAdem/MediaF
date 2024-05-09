@@ -19,66 +19,96 @@ export class PostComponent implements OnInit {
   postId: number = 0; // Initialisez avec une valeur par défaut
   userId: number = 0; // Initialisez avec une valeur par défaut
   postComments: CommentResponse[] = [];
-  postLikes: UserModel[] = []; // Liste des likes du post
+  allPostComments: CommentResponse[] = []; // Déclarer la nouvelle propriété allPostComments
+  postLikes: UserModel[] = []; // Assurez-vous que UserModel est correctement défini
+  userData: any; // Ajout de la variable userData pour vérifier si l'utilisateur est connecté
+
+
+
+  isMenuOpen2 = false; // Ajoutez cette déclaration
 
   constructor(private postService: PostService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.likedByAuthUser = this.postData.liked;
-    this.route.paramMap.subscribe(params => {
-      const postIdParam = params.get('id');
-      const userIdParam = params.get('userId');
-      this.postId = postIdParam ? +postIdParam : 0; // Assurez-vous de vérifier si les paramètres ne sont pas nuls
-      this.userId = userIdParam ? +userIdParam : 0; // Assurez-vous de vérifier si les paramètres ne sont pas nuls
-      this.loadPostComments();
-    });
-
-    this.likedByAuthUser = this.postData.liked;
     this.route.paramMap.subscribe(params => {
       const postIdParam = params.get('id');
       const userIdParam = params.get('userId');
       this.postId = postIdParam ? +postIdParam : 0;
       this.userId = userIdParam ? +userIdParam : 0;
       this.loadPostComments();
-      this.loadPostLikes(); // Charger les likes du post lors de l'initialisation
-    });}
-  likeOrUnlikePost() {
-    const userString = localStorage.getItem('user');
+      this.loadAllPostComments();
+      this.loadPostLikes();
+      this.checkUserLikeStatus();
+      this.checkUserLoggedIn(); // Vérifie si l'utilisateur est connecté lors du chargement initial de la page
+    });
+  }
 
+  closeSettings() {
+    this.isMenuOpen2 = false;
+    this.isMenuOpen1 = false;
+
+  }
+   // Nouvelle méthode pour vérifier si l'utilisateur est connecté
+   checkUserLoggedIn() {
+    this.userData = localStorage.getItem('user');
+  }
+
+  // Méthode pour vérifier l'état du like de l'utilisateur
+  checkUserLikeStatus() {
+    const userString = localStorage.getItem('user');
     if (userString !== null) {
       const user = JSON.parse(userString);
-
       if (user.userId !== undefined && user.userId !== null) {
         const userId = user.userId;
-
-        if (this.likedByAuthUser) {
-          this.postService.unlikePost(this.postData.id, userId).subscribe({
-            next: (response: any) => {
-              this.likedByAuthUser = false;
-              this.postData.likeCount--;
-            },
-            error: (errorResponse: HttpErrorResponse) => {
-              console.error('Erreur lors du "dislike" du post :', errorResponse);
-            }
-          });
-        } else {
-          this.postService.likePost(this.postData.id, userId).subscribe({
-            next: (response: any) => {
-              this.likedByAuthUser = true;
-              this.postData.likeCount++;
-            },
-            error: (errorResponse: HttpErrorResponse) => {
-              console.error('Erreur lors du "like" du post :', errorResponse);
-            }
-          });
-        }
-      } else {
-        console.error('Erreur : Impossible de récupérer l\'ID utilisateur à partir de l\'objet utilisateur stocké dans le localStorage.');
+        const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+        this.likedByAuthUser = likedPosts.includes(this.postData.id);
       }
-    } else {
-      console.error('Erreur : Impossible de récupérer l\'objet utilisateur depuis le localStorage.');
     }
   }
+
+ // Méthode pour gérer les likes/unlikes
+ likeOrUnlikePost() {
+  const userString = localStorage.getItem('user');
+  if (userString !== null) {
+    const user = JSON.parse(userString);
+    if (user.userId !== undefined && user.userId !== null) {
+      const userId = user.userId;
+      if (this.likedByAuthUser) {
+        // Unlike
+        this.postService.unlikePost(this.postData.id, userId).subscribe({
+          next: (response: any) => {
+            this.likedByAuthUser = false;
+            this.postData.likeCount--;
+            const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+            const index = likedPosts.indexOf(this.postData.id);
+            if (index !== -1) {
+              likedPosts.splice(index, 1);
+              localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+            }
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            console.error('Erreur lors du "dislike" du post :', errorResponse);
+          }
+        });
+      } else {
+        // Like
+        this.postService.likePost(this.postData.id, userId).subscribe({
+          next: (response: any) => {
+            this.likedByAuthUser = true;
+            this.postData.likeCount++;
+            const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]');
+            likedPosts.push(this.postData.id);
+            localStorage.setItem('likedPosts', JSON.stringify(likedPosts));
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            console.error('Erreur lors du "like" du post :', errorResponse);
+          }
+        });
+      }
+    }
+  }
+}
+
 
   addComment() {
     // Récupérer l'ID de l'utilisateur à partir du localStorage
@@ -118,28 +148,36 @@ export class PostComponent implements OnInit {
     } else {
       console.error('Erreur : Impossible de récupérer l\'objet utilisateur depuis le localStorage.');
     }
+    this.loadAllPostComments();
+    this.loadPostComments();
+
+
 }
 loadPostComments(): void {
-
   const userString = localStorage.getItem('user');
   if (userString !== null) {
     const user = JSON.parse(userString);
     if (user.userId !== undefined && user.userId !== null) {
       const userId = user.userId;
-  this.postService.getPostComments(this.postData.id, 1, 1, userId)
-    .subscribe((response: CommentResponse[] | HttpErrorResponse) => {
-      if (Array.isArray(response)) {
-        this.postComments = response; // Mettre à jour les commentaires si la réponse est un tableau
-      } else {
-        console.error('Erreur lors du chargement des commentaires :', response);
-        // Traitez l'erreur ici selon votre logique
-        // Par exemple, rediriger l'utilisateur vers une page d'erreur
-      }
-    });
+      this.postService.getPostComments(this.postData.id, 1, 1, userId)
+        .subscribe((response: CommentResponse[] | HttpErrorResponse) => {
+          if (Array.isArray(response)) {
+            this.postComments = response; // Mettre à jour les commentaires si la réponse est un tableau
+          } else {
+            console.error('Erreur lors du chargement des commentaires :', response);
+            // Traitez l'erreur ici selon votre logique
+            // Par exemple, rediriger l'utilisateur vers une page d'erreur
+          }
+        });
+    } else {
+      console.error('Erreur : Impossible de récupérer l\'ID utilisateur à partir de l\'objet utilisateur stocké dans le localStorage.');
+    }
+  } else {
+    console.error('Erreur : Impossible de récupérer l\'objet utilisateur depuis le localStorage.');
+  }
 }
 
 
-  }}
   isMenuOpen = false;
 
   toggleMenu() {
@@ -151,7 +189,6 @@ loadPostComments(): void {
   toggleMenu1() {
     this.isMenuOpen1 = !this.isMenuOpen1;
   }
-  isMenuOpen2 = false;
 
   toggleMenu2() {
     this.isMenuOpen2 = !this.isMenuOpen2;
@@ -159,19 +196,45 @@ loadPostComments(): void {
 
 
   loadPostLikes(): void {
-    this.postService.getPostLikes(this.postData.id, 1, 10).subscribe({
-      next: (response: UserModel[] | HttpErrorResponse) => {
+    
+    console.log('Tentative de chargement des likes...');
+    this.postService.getPostLikes(this.postData.id, 1, 0).subscribe({
+      next: (response: UserModel[] | any) => {
         if (Array.isArray(response)) {
-          this.postLikes = response; // Mettre à jour la liste des likes
+          console.log('Likes chargés avec succès :', response);
+          this.postLikes = response;
         } else {
-          console.error('Erreur lors du chargement des likes du post :', response);
+          console.error('Erreur lors du chargement des likes :', response);
           // Traitez l'erreur ici
         }
       },
-      error: (errorResponse: HttpErrorResponse) => {
-        console.error('Erreur lors du chargement des likes du post :', errorResponse);
+      error: (errorResponse: any) => {
+        console.error('Erreur lors du chargement des likes :', errorResponse);
       }
     });
   }
 
+  loadAllPostComments(): void {
+    const userString = localStorage.getItem('user');
+  if (userString !== null) {
+    const user = JSON.parse(userString);
+    if (user.userId !== undefined && user.userId !== null) {
+      const userId = user.userId;
+      this.postService.getPostComments(this.postData.id, 1, 0, userId)
+        .subscribe((response: CommentResponse[] | HttpErrorResponse) => {
+          if (Array.isArray(response)) {
+            this.allPostComments = response; // Mettre à jour les commentaires si la réponse est un tableau
+          } else {
+            console.error('Erreur lors du chargement des commentaires :', response);
+            // Traitez l'erreur ici selon votre logique
+            // Par exemple, rediriger l'utilisateur vers une page d'erreur
+          }
+        });
+    } else {
+      console.error('Erreur : Impossible de récupérer l\'ID utilisateur à partir de l\'objet utilisateur stocké dans le localStorage.');
+    }
+  } else {
+    console.error('Erreur : Impossible de récupérer l\'objet utilisateur depuis le localStorage.');
+  }
+}
 }

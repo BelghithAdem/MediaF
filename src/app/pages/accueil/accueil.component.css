@@ -42,6 +42,12 @@ body {
 app-post-feed {
     flex-basis: 45%; /* Augmenter la largeur à 60% par exemple */
 }
+app-sidebar-right {
+    flex-basis: 20%; /* Augmenter la largeur à 60% par exemple */
+}
+app-sidebarleft  {
+    flex-basis: 20%; }/* Augmenter la largeur à 60% par exemple */
+ 
 
 
 .footer {
@@ -74,6 +80,7 @@ app-post-feed {
         margin-right: 12px;
         font-size: 9px;
     }
+  
     .add-post-links a img {
         width: 16px;
         margin-right: 5px;

@@ -8,7 +8,6 @@ import { LoginComponent } from './pages/login/login.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { CreatepostComponent } from './pages/createpost/createpost.component';
 import { PostComponent } from './pages/post/post.component';
 import { MatCardModule } from '@angular/material/card';
 import { PostFeedComponent } from './pages/post-feed/post-feed.component';
@@ -17,14 +16,14 @@ import { NavbarComponent } from './pages/navbar/navbar.component';
 import { SiderbarAccountsComponent } from './pages/siderbar-accounts/siderbar-accounts.component';
 import { SidebarRightComponent } from './pages/sidebar-right/sidebar-right.component';
 import { AccueilComponent } from './pages/accueil/accueil.component';
-import { TestComponent } from './test/test.component';
-import { SidebarleftComponent } from './sidebarleft/sidebarleft.component';
-import { AuthComponent } from './components/auth/auth.component';
-import { ChatComponent } from './components/chat/chat.component';
+import { TestComponent } from './pages/test/test.component';
+import { SidebarleftComponent } from './pages/sidebarleft/sidebarleft.component';
+import { ChatComponent } from './pages/chat/chat.component';
 import { StompService } from './services/stomp.service';
 import { UserService } from './services/user.service';
 import { BetterDatePipe } from './better-date.pipe';
 import { PostService } from './services/post.service';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 
 
@@ -35,7 +34,6 @@ import { PostService } from './services/post.service';
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    CreatepostComponent,
     PostComponent,
     PostFeedComponent,
     NavbarComponent,
@@ -45,8 +43,8 @@ import { PostService } from './services/post.service';
     TestComponent,
     SidebarleftComponent,
     ChatComponent,
-   AuthComponent,
-   BetterDatePipe
+   BetterDatePipe,
+   SettingsComponent
   
  
    

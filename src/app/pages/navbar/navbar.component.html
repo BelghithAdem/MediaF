@@ -1,77 +1,164 @@
-<nav class=" bg-white w-full  flex relative shadow justify-between items-center px-14 py-2  ">
-    <!-- logo -->
-    <div class="inline-flex">
-        <a class="_o6689fn" href="/">
-            <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><circle cx="12" cy="5" r="3"></circle><line x1="12" y1="22" x2="12" y2="8"></line><path d="M5 12H2a10 10 0 0 0 20 0h-3"></path></svg>
-        </a>
-    </div>
+<nav class="bg-white w-full flex relative shadow justify-between items-center px-14 py-2">
+  <!-- logo -->
+  <div class="inline-flex">
+      <a class="_o6689fn" href="/">
+          <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none"
+              stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+              <circle cx="12" cy="5" r="3"></circle>
+              <line x1="12" y1="22" x2="12" y2="8"></line>
+              <path d="M5 12H2a10 10 0 0 0 20 0h-3"></path>
+          </svg>
+      </a>
+  </div>
+  <!-- end logo -->
 
-    <!-- end logo -->
 
-    <!-- search bar -->
-    <!-- <div class="hidden sm:block flex-shrink flex-grow-0 justify-start px-2"> -->
-    <div class="relative hidden sm:block flex-shrink flex-grow-0">
-        <input type="text" class="bg-purple-white bg-gray-100 rounded-lg border-0 p-3 w-full" placeholder="Search somthing..." style="min-width:400px; max-height: 45px; margin-top: 5px; margin-bottom: 5px;">
-        <div class="absolute top-0 right-0 p-4 pr-3 text-purple-lighter">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-            </svg>
-        </div>
-    </div>
-    <!-- end search bar -->
-    <div class="hidden sm:ml-6 sm:block">
+<!-- search bar -->
+<div class="relative hidden sm:block flex-shrink flex-grow-0">
+  <input type="text" class="bg-purple-white bg-gray-100 rounded-lg border-0 p-3 w-full"
+      placeholder="Search something..." style="min-width:400px; max-height: 45px; margin-top: 5px; margin-bottom: 5px;"
+      [(ngModel)]="searchInput" (input)="searchUsers()">
+  <div class="absolute top-0 right-0 p-4 pr-3 text-purple-lighter">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+  </div>
+</div>
+
+  <!-- end search bar -->
+
+  <div class="hidden sm:ml-6 sm:block">
       <div class="flex space-x-4">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a routerLink="/accueil" class="text-black rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Accueil</a>
-        <a routerLink="/test" class="text-black  rounded-md px-3 py-2 text-sm font-medium">Profile</a>
-        <a routerLink="/chat" class="text-black  rounded-md px-3 py-2 text-sm font-medium">Chat</a>
+          <a routerLink="/accueil" class="text-black rounded-md px-3 py-2 text-sm font-medium" aria-current="page">Accueil</a>
+          <a [routerLink]="['/profile', userId]" class="text-black  rounded-md px-3 py-2 text-sm font-medium">Profile</a>
+          <a routerLink="/chat" class="text-black  rounded-md px-3 py-2 text-sm font-medium">Chat</a>
       </div>
-    </div>
-    <!-- login -->
-    <div class="flex-initial">
+  </div>
+
+  <!-- login -->
+  <div class="flex-initial">
       <div class="flex justify-end items-center relative">
-       
-        <div class="flex mr-4 items-center">
-          <div class="block relative">
-            <button type="button" class="inline-block py-2 px-3 hover:bg-gray-200 rounded-full relative ">
-              <div class="flex items-center h-5">
-                <div class="_xpkakx">
-                  <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 16px; width: 16px; fill: currentcolor;"><path d="m8.002.25a7.77 7.77 0 0 1 7.748 7.776 7.75 7.75 0 0 1 -7.521 7.72l-.246.004a7.75 7.75 0 0 1 -7.73-7.513l-.003-.245a7.75 7.75 0 0 1 7.752-7.742zm1.949 8.5h-3.903c.155 2.897 1.176 5.343 1.886 5.493l.068.007c.68-.002 1.72-2.365 1.932-5.23zm4.255 0h-2.752c-.091 1.96-.53 3.783-1.188 5.076a6.257 6.257 0 0 0 3.905-4.829zm-9.661 0h-2.75a6.257 6.257 0 0 0 3.934 5.075c-.615-1.208-1.036-2.875-1.162-4.686l-.022-.39zm1.188-6.576-.115.046a6.257 6.257 0 0 0 -3.823 5.03h2.75c.085-1.83.471-3.54 1.059-4.81zm2.262-.424c-.702.002-1.784 2.512-1.947 5.5h3.904c-.156-2.903-1.178-5.343-1.892-5.494l-.065-.007zm2.28.432.023.05c.643 1.288 1.069 3.084 1.157 5.018h2.748a6.275 6.275 0 0 0 -3.929-5.068z"></path></svg>
-                </div>
+
+          <div class="flex mr-4 items-center">
+              <div class="block relative">
+                  <button type="button" class="inline-block py-2 px-3 hover:bg-gray-200 rounded-full relative ">
+                      <div class="flex items-center h-5">
+                          <div class="_xpkakx">
+                              <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"
+                                  role="presentation" focusable="false"
+                                  style="display: block; height: 16px; width: 16px; fill: currentcolor;">
+                                  <path
+                                      d="m8.002.25a7.77 7.77 0 0 1 7.748 7.776 7.75 7.75 0 0 1 -7.521 7.72l-.246.004a7.75 7.75 0 0 1 -7.73-7.513l-.003-.245a7.75 7.75 0 0 1 7.752-7.742zm1.949 8.5h-3.903c.155 2.897 1.176 5.343 1.886 5.493l.068.007c.68-.002 1.72-2.365 1.932-5.23zm4.255 0h-2.752c-.091 1.96-.53 3.783-1.188 5.076a6.257 6.257 0 0 0 3.905-4.829zm-9.661 0h-2.75a6.257 6.257 0 0 0 3.934 5.075c-.615-1.208-1.036-2.875-1.162-4.686l-.022-.39zm1.188-6.576-.115.046a6.257 6.257 0 0 0 -3.823 5.03h2.75c.085-1.83.471-3.54 1.059-4.81zm2.262-.424c-.702.002-1.784 2.512-1.947 5.5h3.904c-.156-2.903-1.178-5.343-1.892-5.494l-.065-.007zm2.28.432.023.05c.643 1.288 1.069 3.084 1.157 5.018h2.748a6.275 6.275 0 0 0 -3.929-5.068z">
+                                  </path>
+                              </svg>
+                          </div>
+                      </div>
+                  </button>
               </div>
-            </button>
-          </div>
-        </div>
-
-        <!-- Profile dropdown -->
-        <div class="relative ml-3">
-          <div>
-            <button (click)="toggleMenu()"  type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-              <span class="absolute -inset-1.5"></span>
-              <span class="sr-only">Open user menu</span>
-              <img class="h-8 w-8 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" alt="">
-            </button>
           </div>
 
-          <!--
-            Dropdown menu, show/hide based on menu state.
+          <!-- Profile dropdown -->
+          <div class="relative ml-3">
+              <div>
+                  <button (click)="toggleMenu()" type="button"
+                      class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                      <span class="absolute -inset-1.5"></span>
+                      <span class="sr-only">Open user menu</span>
+                      <img class="h-8 w-8 rounded-full"
+                          src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                          alt="">
+                  </button>
+              </div>
 
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          -->
-          <div *ngIf="isMenuOpen"  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-            <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+              <!-- Dropdown menu, show/hide based on menu state. -->
+              <div *ngIf="isMenuOpen"
+                  class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                  role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                  <!-- Active: "bg-gray-100", Not Active: "" -->
+                  <a [routerLink]="['/profile', userId]"class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                      id="user-menu-item-0">Your Profile</a>
+                      <a routerLink="/settings"class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                      id="user-menu-item-0">Settings</a>
+              
+                  <a href="#" (click)="signOut()"
+                      class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1"
+                      id="user-menu-item-2">Sign out</a>
+              </div>
           </div>
-        </div>
       </div>
-    </div>
-
-    <!-- end login -->
+  </div>
+  <!-- end login -->
 </nav>
+
+<!-- Formulaire de modification -->
+<div *ngIf="isSettingsOpen" class="fixed inset-0 bg-gray-500 bg-opacity-50 z-20 flex items-center justify-center">
+  <div class="absolute inset-0 backdrop-filter backdrop-blur-md"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div class="mx-auto w-full max-w-[550px] bg-white rounded-lg overflow-hidden ">
+      <button (click)="closeSettings()" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 cursor-pointer">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+      <form class="py-6 px-9">
+        <div class="mb-5">
+          <label for="email" class="mb-3 block text-base font-medium text-[#07074D]">Send files to this email:</label>
+          <input type="email" name="email" id="email" placeholder="example@domain.com" class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+        </div>
+
+        <div class="mb-6 pt-4">
+          <label class="mb-5 block text-xl font-semibold text-[#07074D]">Upload File</label>
+
+          <div class="mb-8">
+            <input type="file" name="file" id="file" class="sr-only" />
+            <label for="file" class="relative flex min-h-[200px] items-center justify-center rounded-md border border-dashed border-[#e0e0e0] p-12 text-center">
+              <div>
+                <span class="mb-2 block text-xl font-semibold text-[#07074D]">Drop files here</span>
+                <span class="mb-2 block text-base font-medium text-[#6B7280]">Or</span>
+                <span class="inline-flex rounded border border-[#e0e0e0] py-2 px-7 text-base font-medium text-[#07074D]">Browse</span>
+              </div>
+            </label>
+          </div>
+
+        
+
+          <div class="rounded-md bg-[#F5F7FB] py-4 px-8">
+            <div class="flex items-center justify-between">
+              <span class="truncate pr-3 text-base font-medium text-[#07074D]">banner-design.png</span>
+              <button class="text-[#07074D]">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 0.279338C0.651787 -0.0931121 1.25565 -0.0931121 1.6281 0.279338L9.72066 8.3719C10.0931 8.74435 10.0931 9.34821 9.72066 9.72066C9.34821 10.0931 8.74435 10.0931 8.3719 9.72066L0.279337 1.6281C-0.0931125 1.25565 -0.0931125 0.651788 0.279337 0.279338Z" fill="currentColor"></path><path fill-rule="evenodd" clip-rule="evenodd" d="M0.279337 9.72066C-0.0931125 9.34821 -0.0931125 8.74435 0.279337 8.3719L8.3719 0.279338C8.74435 -0.0931127 9.34821 -0.0931123 9.72066 0.279338C10.0931 0.651787 10.0931 1.25565 9.72066 1.6281L1.6281 9.72066C1.25565 10.0931 0.651787 10.0931 0.279337 9.72066Z" fill="currentColor"></path></svg>
+              </button>
+            </div>
+            <div class="relative mt-5 h-[6px] w-full rounded-lg bg-[#E2E5EF]">
+              <div class="absolute left-0 right-0 h-full w-[75%] rounded-lg bg-[#6A64F1]"></div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button class="hover:shadow-form w-full rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">Send File</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<div *ngIf="searchResults.length > 0" class="absolute shadow bg-white  z-40  lef-0 rounded max-h-[200px]  min-h-[200px] overflow-y-auto svelte-5uyqqj" style="margin-left:20%; margin-top: 260px; width: px;">
+  <div class="flex flex-col w-full">
+      <div [routerLink]="['/profile', user.userId]" (click)="clickUserProfile(user.userId)"  *ngFor="let user of searchResults" class="cursor-pointer w-full border-gray-100 rounded-t border-b hover:bg-teal-100">
+          <div class="flex w-full items-center p-2 pl-2 border-transparent border-l-2 relative hover:border-teal-100">
+              <div class="w-6 flex flex-col items-center">
+                  <div class="flex relative w-5 h-5 bg-orange-500 justify-center items-center m-1 mr-2 w-4 h-4 mt-1 rounded-full ">
+                    <img class="rounded-full" alt="A" 
+                    [src]="user.photoProfile ? 'http://localhost:8081/api/posts/image/' + user.photoProfile :  'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80'" 
+                    > </div>
+              </div>
+              <div class="w-full items-center flex">
+                  <div class="mx-2 -mt-1  ">{{ user.lastName }} {{ user.firstName }}
+                  </div>
+              </div>
+          </div>
+      </div>
+
+  </div>
+</div>

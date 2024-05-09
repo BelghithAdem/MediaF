@@ -1,14 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { MessageRequest } from '../../interfaces/message-request';
-import { ApiResponse } from 'src/app/interfaces/api-response';
-import { User } from 'src/app/interfaces/user';
-import { ConversationResponse } from 'src/app/interfaces/conversation-response';
-import { MessageResponse } from 'src/app/interfaces/message-response';
+import { MessageRequest } from '../../models/message-request';
+import { ApiResponse } from 'src/app/models/api-response';
+import { User } from 'src/app/models/user';
+import { ConversationResponse } from 'src/app/models/conversation-response';
+import { MessageResponse } from 'src/app/models/message-response';
 import { StompService } from 'src/app/services/stomp.service';
 import { Subscription } from 'rxjs';
-import { WebSocketResponse } from 'src/app/interfaces/web-socket-response';
+import { WebSocketResponse } from 'src/app/models/web-socket-response';
 
 @Component({
   selector: 'app-chat',
