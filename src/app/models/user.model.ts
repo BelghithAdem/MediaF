@@ -8,4 +8,5 @@ export interface UserModel {
     followingCount:number
     password: string;
     photoProfile:string;
+    qrCodeUri:string;
   }

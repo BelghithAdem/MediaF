@@ -119,5 +119,8 @@ searchUsers(query: string): Observable<any[]> {
   const params = { query: query }; // Créer un objet avec les paramètres de recherche
   return this.http.get<any[]>(url, { params: params, headers: this.getHeaders() });
 }
-
+verifyCode(verificationRequest: any): Observable<any> {
+  const url = `${this.apiUrl}/verify`; // URL pour la vérification du code
+  return this.http.post<any>(url, verificationRequest);
+}
 }

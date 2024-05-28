@@ -4,4 +4,5 @@ export interface CommentResponse {
 	likedByAuthUser: boolean;
 	comment: Comment;
 	
+	
 }

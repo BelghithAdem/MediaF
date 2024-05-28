@@ -110,49 +110,49 @@ export class PostComponent implements OnInit {
 }
 
 
-  addComment() {
-    // Récupérer l'ID de l'utilisateur à partir du localStorage
-    const userString = localStorage.getItem('user');
-    if (userString !== null) {
-      const user = JSON.parse(userString);
-      if (user.userId !== undefined && user.userId !== null) {
-        const userId = user.userId;
-        // Vérifiez si le texte du commentaire n'est pas vide
-        if (this.commentText.trim() !== '') {
-          this.postService.createPostComment(this.postData.id, userId, this.commentText).subscribe({
-            next: (response: any) => {
-              // Assurez-vous que this.postData.comments est défini
-              if (!this.postData.comments) {
-                this.postData.comments = [];
-              }
-              // Ajoutez le commentaire à la liste des commentaires du post
-              this.postData.comments.push({
-                id: response.id,
-                content: this.commentText,
-                likeCount: 0,
-                dateCreated: response.dateCreated,
-                dateLastModified: response.dateLastModified,
-                author: user
-              });
-              // Réinitialisez le champ de texte du commentaire après l'ajout
-              this.commentText = '';
-            },
-            error: (errorResponse: HttpErrorResponse) => {
-              console.error('Erreur lors de l\'ajout du commentaire :', errorResponse);
+addComment() {
+  // Récupérer l'ID de l'utilisateur à partir du localStorage
+  const userString = localStorage.getItem('user');
+  if (userString !== null) {
+    const user = JSON.parse(userString);
+    if (user.userId !== undefined && user.userId !== null) {
+      const userId = user.userId;
+      // Vérifiez si le texte du commentaire n'est pas vide
+      if (this.commentText.trim() !== '') {
+        this.postService.createPostComment(this.postData.id, userId, this.commentText).subscribe({
+          next: (response: any) => {
+            // Assurez-vous que this.postData.comments est défini
+            if (!this.postData.comments) {
+              this.postData.comments = [];
             }
-          });
-        }
-      } else {
-        console.error('Erreur : Impossible de récupérer l\'ID utilisateur à partir de l\'objet utilisateur stocké dans le localStorage.');
+            // Ajoutez le commentaire à la liste des commentaires du post
+            this.postData.comments.push({
+              id: response.id,
+              content: this.commentText,
+              likeCount: 0,
+              dateCreated: response.dateCreated,
+              dateLastModified: response.dateLastModified,
+              author: user
+            });
+            // Réinitialisez le champ de texte du commentaire après l'ajout
+            this.commentText = '';
+            // Rechargez la liste de tous les commentaires après avoir ajouté un nouveau commentaire
+            this.loadAllPostComments();
+            this.loadPostComments();
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            console.error('Erreur lors de l\'ajout du commentaire :', errorResponse);
+          }
+        });
       }
     } else {
-      console.error('Erreur : Impossible de récupérer l\'objet utilisateur depuis le localStorage.');
+      console.error('Erreur : Impossible de récupérer l\'ID utilisateur à partir de l\'objet utilisateur stocké dans le localStorage.');
     }
-    this.loadAllPostComments();
-    this.loadPostComments();
-
-
+  } else {
+    console.error('Erreur : Impossible de récupérer l\'objet utilisateur depuis le localStorage.');
+  }
 }
+
 loadPostComments(): void {
   const userString = localStorage.getItem('user');
   if (userString !== null) {
@@ -224,6 +224,8 @@ loadPostComments(): void {
         .subscribe((response: CommentResponse[] | HttpErrorResponse) => {
           if (Array.isArray(response)) {
             this.allPostComments = response; // Mettre à jour les commentaires si la réponse est un tableau
+               // Rechargez la liste de tous les commentaires après avoir ajouté un nouveau commentaire
+         
           } else {
             console.error('Erreur lors du chargement des commentaires :', response);
             // Traitez l'erreur ici selon votre logique

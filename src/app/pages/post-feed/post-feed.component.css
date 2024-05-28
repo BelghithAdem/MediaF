@@ -114,3 +114,10 @@
         padding-left: 0;
     }
 }
+
+
+.my-popup-class {
+    width: 200px; /* Ajustez la largeur comme vous le souhaitez */
+    height: auto; /* Ajustez la hauteur comme vous le souhaitez */
+    font-size: 14px; /* Ajustez la taille de la police selon vos préférences */
+}

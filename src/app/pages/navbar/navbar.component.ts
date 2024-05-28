@@ -66,13 +66,15 @@ export class NavbarComponent implements OnInit {
   }
   toggleSettings() {
     this.isSettingsOpen = !this.isSettingsOpen;
-    this.isMenuOpen = false;
+    this.isMenuOpen = !this.isMenuOpen;
 
-  }
+}
   toggleLoginForm() {
     this.isLoginFormOpen = !this.isLoginFormOpen;
     this.isSettingsOpen = false; // Fermez les paramètres lorsque le formulaire de connexion est ouvert
   }
+
+
 
   signOut() {
     // Supprimer les données utilisateur stockées localement

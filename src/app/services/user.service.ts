@@ -13,15 +13,6 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-  // Attempt to log in a user with the provided credentials
-  userLogin(body: LoginRequest): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.baseUrl.concat('/login'), body);
-  }
-
-  // Register a new user with the provided user data
-  userRegister(body: User): Observable<ApiResponse> {
-    return this.http.post<ApiResponse>(this.baseUrl.concat('/register'), body);
-  }
 
   // Retrieve a list of all users except the currently logged-in user
   getAllUsersExceptCurrentUser(): Observable<ApiResponse> {

@@ -126,7 +126,7 @@
         <div class="form-group">
           <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Adresse e-mail</label>
           <input type="email" formControlName="email" id="email"
-            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 "
             placeholder="name@company.com" required="">
           <div *ngIf="f['email'].touched && f['email'].invalid" class="text-danger">
             <div *ngIf="f['email']?.errors?.['required']" class="text-red-400 px-1 py-1 relative" role="alert">
@@ -148,19 +148,31 @@
        
           <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Mot de passe</label>
           <div class="input-group">
-            <input *ngIf="!passwordVisible" type="password" formControlName="password" id="password"
-              placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required="">
-            <input *ngIf="passwordVisible" type="text" formControlName="password" id="password"
-              placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required="">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" (click)="togglePasswordVisibility()">
-                <i class="mdi" [ngClass]="passwordVisible ? 'mdi-eye-off' : 'mdi-eye'"></i>
-              </button>
+            <div class="bg-white relative flex items-center border border-gray-500 focus:ring focus:border-blue-500 rounded">
+              <input 
+                [type]="passwordVisible1 ? 'text' : 'password'" 
+                placeholder="••••••••" 
+                formControlName="password"
+                id="password" 
+                class="g-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 " 
+              />
+              <a  *ngIf="!passwordVisible1"
+                class=" text-sm font-bold bg-white text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer" 
+                (click)="togglecPasswordVisibility()"
+              >
+              <svg x-show="!isshow" aria-hidden="true" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>    
+              </a>
+              <a  *ngIf="passwordVisible1"
+              class="text-sm font-bold bg-white text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer" 
+              (click)="togglecPasswordVisibility()"
+            >
+            Hide                          
+            </a>
             </div>
+         
           </div>
           <div *ngIf="f['password'].touched && f['password'].invalid">
             <div *ngIf="f['password']?.errors?.['required']" class="text-red-400 px-1 py-1 relative" role="alert">
@@ -176,27 +188,44 @@
          
             <span class="block sm:inline">Votre mot de passe est court.</span>
 
-            
           </div>
        
-
+    
         <!-- Nouveau champ pour la confirmation du mot de passe -->
         <div class="form-group">
           <label for="confirmPassword" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Confirmer le mot de passe</label>
           <div class="input-group">
-            <input *ngIf="!passwordVisible1" type="password" formControlName="confirmPassword" id="confirmPassword"
-              placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required="">
-            <input *ngIf="passwordVisible1" type="text" formControlName="confirmPassword" id="confirmPassword"
-              placeholder="••••••••"
-              class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              required="">
+            <div class="bg-white relative flex items-center border border-gray-500 focus:ring focus:border-blue-500 rounded  ">
+              <input 
+                [type]="showPassword ? 'text' : 'password'" 
+                placeholder="••••••••" 
+                formControlName="confirmPassword"
+                id="password" 
+                class="g-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700  dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 " 
+              />
+              <a  *ngIf="!showPassword"
+                class="text-sm font-bold bg-white text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer" 
+                (click)="togglePasswordVisibility()"
+              >
+              <svg x-show="!isshow" aria-hidden="true" class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+              </svg>    
+              </a>
+              <a  *ngIf="showPassword"
+              class="text-sm font-bold bg-white text-blue-700 hover:bg-blue-100 rounded-full px-2 py-1 mr-1 leading-normal cursor-pointer" 
+              (click)="togglePasswordVisibility()"
+            >
+            Hide                          
+            </a>
+            
+            </div>
             <div class="input-group-append">
               <button class="btn btn-outline-secondary" type="button" (click)="togglecPasswordVisibility()">
                 <i class="mdi" [ngClass]="passwordVisible1 ? 'mdi-eye-off' : 'mdi-eye'"></i>
               </button>
             </div>
+            
           </div>
           
           <div *ngIf="isConfirmPasswordInvalid()" class="text-red-400 px-1 py-1 relative" role="alert">
@@ -212,24 +241,34 @@
 
         <button type="submit" [disabled]="submitted"
           class="w-full bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create an account</button>
-
+          <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+            Two-factor Authentication
+            <input type="checkbox" formControlName="mfaEnabled">
+          </label>
       </form>
 
     </ng-container>
 
     <!-- Deuxième formulaire de vérification -->
     <ng-container *ngIf="verificationCodeEntered">
+      <div *ngIf="qrCodeUri">
+        <p class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">QR code pour valider le compte Authenticator</p>
+
+        <img [src]="qrCodeUri" alt="QR Code">
+      </div> 
       <form [formGroup]="verificationForm" class="space-y-4 md:space-y-6">
         <div>
-          <label for="verification-code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Verification Code</label>
+          <label for="verification-code" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Verification Code with Email</label>
           <input type="text" formControlName="code" id="verification-code" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter verification code" required="">
         </div>
       
         <button type="button" (click)="verifyCode()" class="w-full bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Verify Code</button>
+     
       </form>
+
     </ng-container>
     <div class="mt-4 text-sm text-gray-600 text-center">
-      <p>Already have an account? <a routerLink=" " class="text-black hover:underline">Login here</a>
+      <p>Already have an account? <a routerLink="/" class="text-black hover:underline">Login here</a>
       </p>
     </div>
   </div>

@@ -12,6 +12,8 @@ import { UserModel } from 'src/app/models/user.model';
 export class SidebarleftComponent implements OnInit {
   isMenuOpen = false;
   userProfile!: UserModel; // Assuming UserModel is the model for user profile
+  isSettingsOpen = false;
+
 
   constructor(
     private backApiService: BackApiService,
@@ -30,7 +32,14 @@ export class SidebarleftComponent implements OnInit {
 
    
   }
+  toggleSettings() {
+    this.isSettingsOpen = !this.isSettingsOpen;
 
+}
+  // Fonction pour fermer les paramètres
+  closeSettings() {
+    this.isSettingsOpen = false;
+  }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
