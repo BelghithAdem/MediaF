@@ -115,7 +115,7 @@ getUserProfile(userId: number): Observable<UserModel> {
 
 
 searchUsers(query: string): Observable<any[]> {
-  const url = `${this.apiUrl}/users`; // Utiliser l'URL de base de l'API
+  const url = `${this.apiUrl}/users`; // Utiliser l'URL de base de l'APIjjj
   const params = { query: query }; // Créer un objet avec les paramètres de recherche
   return this.http.get<any[]>(url, { params: params, headers: this.getHeaders() });
 }
