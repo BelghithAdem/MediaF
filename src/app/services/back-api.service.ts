@@ -100,7 +100,7 @@ export class BackApiService {
   const formData: FormData = new FormData();
   formData.append('photo', photo);
 
-  // Send POST request with formData
+  // Send POST request with formData,xnc
   return this.http.post(url, formData, { headers: this.getHeaders() });
 }
 getPostsByUserId(userId: number): Observable<PostModel[]> {
