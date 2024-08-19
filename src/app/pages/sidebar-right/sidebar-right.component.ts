@@ -13,7 +13,10 @@ export class SidebarRightComponent implements OnInit {
   followedUserIds = new Set<number>(); // Utiliser un ensemble pour stocker les identifiants des utilisateurs suivis
   loggedInUserId: number | null = null;
 
-  constructor(private userService: UserService, private backApiService: BackApiService) {}
+  constructor(
+    private userService: UserService,
+    private backApiService: BackApiService
+  ) {}
 
   ngOnInit(): void {
     this.getAllUsersExceptCurrentUser().subscribe((response) => {
@@ -35,7 +38,10 @@ export class SidebarRightComponent implements OnInit {
           data.forEach((user: any) => this.followedUserIds.add(user.id));
         },
         (error) => {
-          console.error('Erreur lors de la récupération des utilisateurs suivis :', error);
+          console.error(
+            'Erreur lors de la récupération des utilisateurs suivis :',
+            error
+          );
         }
       );
     }
@@ -55,7 +61,10 @@ export class SidebarRightComponent implements OnInit {
           this.followedUserIds.delete(userId); // Retirer l'utilisateur de l'ensemble
         },
         (error) => {
-          console.error('Erreur lors de la désinscription de l\'utilisateur :', error);
+          console.error(
+            "Erreur lors de la désinscription de l'utilisateur :",
+            error
+          );
         }
       );
     } else {
@@ -65,7 +74,10 @@ export class SidebarRightComponent implements OnInit {
           this.followedUserIds.add(userId); // Ajouter l'utilisateur à l'ensemble
         },
         (error) => {
-          console.error('Erreur lors de la souscription à l\'utilisateur :', error);
+          console.error(
+            "Erreur lors de la souscription à l'utilisateur :",
+            error
+          );
         }
       );
     }

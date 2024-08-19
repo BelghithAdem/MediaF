@@ -1,53 +1,110 @@
-
 <div class="left-sidebar">
-    <div class="bg-white   p-6 mb-4  ">
- 
-        <div class="flex flex-col gap-1 text-center items-center ">
-            <img class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4" 
-            *ngIf="userProfile"
-            [src]="userProfile.photoProfile ? 'http://localhost:8081/api/posts/image/' + userProfile.photoProfile : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80'" 
-            alt="Profile Picture">
-            <p class="font-semibold">{{ userProfile?.prenom }} {{ userProfile?.nom }}  </p>
-            <div class="text-sm leading-normal text-gray-400 flex justify-center items-center">
-            <svg viewBox="0 0 24 24" class="mr-1" width="16" height="16" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-            {{ userProfile?.currentCity }}     
-            </div>
-        </div>
-      
-    </div>
-   
-    <div class="imp-links">
-     
-    </div>
-    <div class="shortcut-links">
-        <p>Your Shortcuts</p>
-        <a *ngIf="userProfile && userProfile.id" [routerLink]="['/profile', userProfile.id]">
-            <img [src]="userProfile.photoProfile ? 'http://localhost:8081/api/posts/image/' + userProfile.photoProfile : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80'" 
-            alt=""> Profile
-        </a>
-        <a routerLink="/chat"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgyV15RiIvyU9pByAuP0udEojWzka5HYtoxQ&s" alt=""> Chat</a>
-        <a  (click)="toggleSettings()" class="cursor-pointer">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3iiQtlhS5YgzC4_u5L-tHpSlTI_V2XAtpFg&s" alt="">
-         Settings</a>
-
-
-    </div>
-</div>
-
-
-<div *ngIf="isSettingsOpen" class="fixed inset-0 bg-gray-500 bg-opacity-50 z-20 flex items-center justify-center mt-16">
-    <div class="absolute inset-0 backdrop-filter backdrop-blur-md"></div>
-    <div class="absolute inset-0 flex items-center justify-center">
-      <div class="mx-auto w-full max-w-[900px] bg-white rounded-lg overflow-hidden">
-        <div class="overflow-y-auto max-h-[500px]" id="commentContainer">
-          <!-- Contenu du formulaire de modification -->
-          <!-- Bouton de fermeture -->
-          <button   (click)="closeSettings()" class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 cursor-pointer">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-          </button>
-        </div>
-      <app-settings></app-settings>
+  <div class="bg-white p-6 mb-4">
+    <div class="flex flex-col gap-1 text-center items-center">
+      <img
+        class="h-32 w-32 bg-white p-2 rounded-full shadow mb-4"
+        *ngIf="userProfile"
+        [src]="
+          userProfile.photoProfile
+            ? 'http://localhost:8081/api/posts/image/' +
+              userProfile.photoProfile
+            : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80'
+        "
+        alt="Profile Picture"
+      />
+      <p class="font-semibold">
+        {{ userProfile?.prenom }} {{ userProfile?.nom }}
+      </p>
+      <div
+        class="text-sm leading-normal text-gray-400 flex justify-center items-center"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          class="mr-1"
+          width="16"
+          height="16"
+          stroke="currentColor"
+          stroke-width="2"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+          <circle cx="12" cy="10" r="3"></circle>
+        </svg>
+        {{ userProfile?.currentCity }}
       </div>
     </div>
   </div>
-  
+
+  <div class="imp-links"></div>
+  <div class="shortcut-links">
+    <p>Your Shortcuts</p>
+    <a
+      *ngIf="userProfile && userProfile.id"
+      [routerLink]="['/profile', userProfile.id]"
+    >
+      <img
+        [src]="
+          userProfile.photoProfile
+            ? 'http://localhost:8081/api/posts/image/' +
+              userProfile.photoProfile
+            : 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;ixlib=rb-1.2.1&amp;auto=format&amp;fit=crop&amp;w=2000&amp;q=80'
+        "
+        alt=""
+      />
+      Profile
+    </a>
+    <a routerLink="/chat"
+      ><img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgyV15RiIvyU9pByAuP0udEojWzka5HYtoxQ&s"
+        alt=""
+      />
+      Chat</a
+    >
+    <a (click)="toggleSettings()" class="cursor-pointer">
+      <img
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3iiQtlhS5YgzC4_u5L-tHpSlTI_V2XAtpFg&s"
+        alt=""
+      />
+      Settings</a
+    >
+  </div>
+</div>
+
+<div
+  *ngIf="isSettingsOpen"
+  class="fixed inset-0 bg-gray-500 bg-opacity-50 z-20 flex items-center justify-center mt-16"
+>
+  <div class="absolute inset-0 backdrop-filter backdrop-blur-md"></div>
+  <div class="absolute inset-0 flex items-center justify-center">
+    <div
+      class="mx-auto w-full max-w-[900px] bg-white rounded-lg overflow-hidden"
+    >
+      <div class="overflow-y-auto max-h-[500px]" id="commentContainer">
+        <!-- Contenu du formulaire de modification -->
+        <!-- Bouton de fermeture -->
+        <button
+          (click)="closeSettings()"
+          class="absolute top-4 right-4 text-gray-600 hover:text-gray-800 cursor-pointer"
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <app-settings></app-settings>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,3 @@
-
 export interface activation {
-    code: string;
-    
-  }
+  code: string;
+}

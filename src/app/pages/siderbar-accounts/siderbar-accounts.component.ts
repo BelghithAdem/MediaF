@@ -5,7 +5,7 @@ import { PostModel } from 'src/app/models/post';
   selector: 'app-siderbar-accounts',
   templateUrl: './siderbar-accounts.component.html',
   styleUrls: ['./siderbar-accounts.component.css'],
-  providers: [BackApiService]
+  providers: [BackApiService],
 })
 export class SiderbarAccountsComponent implements OnInit {
   posts: PostModel[] = [];
@@ -17,5 +17,4 @@ export class SiderbarAccountsComponent implements OnInit {
       this.posts = data;
     });
   }
-  
 }

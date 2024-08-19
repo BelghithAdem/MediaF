@@ -1,6 +1,5 @@
-
 <!DOCTYPE html>
-<html  lang="en">
+<html lang="en">
   <head>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -16,232 +15,238 @@
       var global = window; // fix global is undefined in sockjs-client
     </script>
   </head>
-  <body >
-
-
-<div class="container-fluid">
-  
-  <!-- Row for dividing the content into two columns -->
-  <div class="row">
-    <!-- Left column for user information, user list, and conversations list -->
-    <div
-      [ngClass]="
-        selectedConversationId == -1
-          ? 'd-block d-sm-block'
-          : 'd-none d-sm-block'
-      "
-      class=" bg-white col-sm-5 col-md-4 col-lg-3"
-    >
-      <div class="vh-100 d-flex flex-column">
-        <div class="py-2">
-          <div class="py-2 d-flex align-items-center">
-          <img class="h-14 mt-4  mb-4 " src="data:image/png;base64,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" alt="">
-          <h4 class="m-0">Chats</h4> <!-- Ajout de la classe m-0 pour supprimer les marges du titre -->
-        </div>
-          <div class="d-flex">
-            <!-- Toggle user list, and conversations list -->
-            <button
-              (click)="onShowHideUserConversation()"
-              class=" bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-
-            >
-              <span *ngIf="!showUserState">Show Available Users</span>
-              <span *ngIf="showUserState">Show Conversations</span>
-            </button>
-
-            <button (click)="onUserLogout()" class=" bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-1 ml-2 text-center text-white dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              Retour 
-            </button>
-            
-          </div>
-        </div>
-
-        <!-- Users list section -->
-        <h5 *ngIf="showUserState" class="mt-2 m-0">Available Users</h5>
-        <div *ngIf="showUserState" class="scrollarea">
-          <!-- Display a list of users -->
-          <div
-            *ngFor="let u of users"
-            (click)="onUserSelected(u.userId, u.firstName + ' ' + u.lastName )"
-            class="p-2 mt-2 cursor-pointer bg-secondary-subtle rounded"
-          >
-            <h5>{{ u.lastName + " " + u.firstName }}</h5>
-          </div>
-        </div>
-
-        <!-- Conversations list section -->
-        <h5 *ngIf="!showUserState" class="mt-2 word-break-all m-0">
-          Conversations
-        </h5>
-        <div *ngIf="!showUserState" class="scrollarea">
-          <div
-            *ngFor="let c of userConversations; let i = index"
-            (click)="onConversationSelected(i)"
-            class="p-2 mt-2 d-flex align-items-center cursor-pointer rounded bg-secondary-subtle"
-          >
-            <div>
-
-              <div
-                class="flex items-center justify-center h-12 w-12 mr-2 bg-blue-600  rounded-full text-white text-lg"
-              >
-              {{
-                c.otherUserName.charAt(0)
-              }}
+  <body>
+    <div class="container-fluid">
+      <!-- Row for dividing the content into two columns -->
+      <div class="row">
+        <!-- Left column for user information, user list, and conversations list -->
+        <div
+          [ngClass]="
+            selectedConversationId == -1
+              ? 'd-block d-sm-block'
+              : 'd-none d-sm-block'
+          "
+          class="bg-white col-sm-5 col-md-4 col-lg-3"
+        >
+          <div class="vh-100 d-flex flex-column">
+            <div class="py-2">
+              <div class="py-2 d-flex align-items-center">
+                <img
+                  class="h-14 mt-4 mb-4"
+                  src="data:image/png;base64,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"
+                  alt=""
+                />
+                <h4 class="m-0">Chats</h4>
+                <!-- Ajout de la classe m-0 pour supprimer les marges du titre -->
               </div>
+              <div class="d-flex">
+                <!-- Toggle user list, and conversations list -->
+                <button
+                  (click)="onShowHideUserConversation()"
+                  class="bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center text-white dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  <span *ngIf="!showUserState">Show Available Users</span>
+                  <span *ngIf="showUserState">Show Conversations</span>
+                </button>
 
-             
+                <button
+                  (click)="onUserLogout()"
+                  class="bg-blue-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-1 py-1 ml-2 text-center text-white dark:bg-blue-500 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                >
+                  Retour
+                </button>
+              </div>
             </div>
-            <div class="w-100">
-              <h6 class="m-0">{{ c.otherUserName }}</h6>
-              <small class=" font-italic m-0">{{ c.lastMessage }}</small>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Right column for displaying selected conversations -->
-    <div
-      [ngClass]="
-        selectedConversationId == -1
-          ? 'd-none d-sm-block'
-          : 'd-block d-sm-block'
-      "
-      class="col-sm-7 col-md-8 col-lg-9 bg-body-tertiary p-0 border-start border-secondary-subtle"
-    >
-      <!-- Message for when no conversation is selected -->
-      <div
-        *ngIf="selectedConversationId == -1"
-        class="d-flex justify-content-center align-items-center vh-100"
-      >
-        <div class="text-center">
-          <i class="bi bi-chat-dots fs-1"></i>
-          <h4>No conversation selected</h4>
-          <p>Click on a conversation or find<br />new user to start chat</p>
-        </div>
-      </div>
-
-      <!-- Conversation display -->
-      <div
-        *ngIf="selectedConversationId != -1"
-        class="vh-100 d-flex flex-column"
-      >
-        <div class="p-2 d-flex justify-content-between bg-body-secondary">
-          <div class="d-flex align-items-center justify-content-center">
-            <button (click)="onCloseChat()" class="btn py-0 me-1 d-sm-none">
-              <i class="bi bi-list fs-4"></i>
-            </button>
-            <h4 class="m-0">{{ selectedConversationReceiverName }}</h4>
-          </div>
-          <button
-            class="btn btn-light"
-            data-bs-toggle="modal"
-            (click)="onDeleteConversation()"
-            data-bs-target="#deleteChatModal"
-          >
-            <i class="bi bi-trash-fill text-danger"></i> Delete Chat
-          </button>
-        </div>
-
-        <!-- Main conversation display area -->
-        <div class="main-flex-grow scrollarea p-2">
-          <div *ngFor="let m of selectedConversation" class="mt-2">
-            <div
-              class="text-white rounded py-1 px-2 mw-75"
-              [ngClass]="
-                currentUser.userId == m.senderId
-                  ? 'float-end bg-primary-1 text-white'
-                  : 'float-start bg-secondary-subtle text-dark'
-              "
-            >
+            <!-- Users list section -->
+            <h5 *ngIf="showUserState" class="mt-2 m-0">Available Users</h5>
+            <div *ngIf="showUserState" class="scrollarea">
+              <!-- Display a list of users -->
               <div
-                class="fs-6 word-break"
-                [ngClass]="
-                  currentUser.userId == m.senderId ? 'text-white' : 'text-dark'
+                *ngFor="let u of users"
+                (click)="
+                  onUserSelected(u.userId, u.firstName + ' ' + u.lastName)
                 "
+                class="p-2 mt-2 cursor-pointer bg-secondary-subtle rounded"
               >
-                {{ m.message }}
-              </div>
-              <div
-                class="fs-7"
-                [ngClass]="
-                  currentUser.userId == m.senderId
-                    ? 'float-end text-white-50'
-                    : 'float-start text-black-50'
-                "
-              >
-                {{ m.timestamp | betterDate }}
+                <h5>{{ u.lastName + " " + u.firstName }}</h5>
               </div>
             </div>
-            <div *ngIf="currentUser.userId == m.senderId">
-              <i
-                (click)="onDeleteMessage(m.messageId)"
-                class="bi bi-trash text-danger p-2 cursor-pointer float-end opacity-hover"
-              ></i>
+
+            <!-- Conversations list section -->
+            <h5 *ngIf="!showUserState" class="mt-2 word-break-all m-0">
+              Conversations
+            </h5>
+            <div *ngIf="!showUserState" class="scrollarea">
+              <div
+                *ngFor="let c of userConversations; let i = index"
+                (click)="onConversationSelected(i)"
+                class="p-2 mt-2 d-flex align-items-center cursor-pointer rounded bg-secondary-subtle"
+              >
+                <div>
+                  <div
+                    class="flex items-center justify-center h-12 w-12 mr-2 bg-blue-600 rounded-full text-white text-lg"
+                  >
+                    {{ c.otherUserName.charAt(0) }}
+                  </div>
+                </div>
+                <div class="w-100">
+                  <h6 class="m-0">{{ c.otherUserName }}</h6>
+                  <small class="font-italic m-0">{{ c.lastMessage }}</small>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- Message input form -->
-        <div>
-          <form (submit)="onSendMessage()">
-            <div class="d-flex px-4 py-2 bg-body-secondary">
-              <input
-                class="form-control"
-                type="text"
-                name="message"
-                placeholder="Type a message"
-                [(ngModel)]="message"
-              />
-              <button type="submit" class="btn bg-primary-1 ms-2">
-                <i class="bi bi-send text-white"></i>
+        <!-- Right column for displaying selected conversations -->
+        <div
+          [ngClass]="
+            selectedConversationId == -1
+              ? 'd-none d-sm-block'
+              : 'd-block d-sm-block'
+          "
+          class="col-sm-7 col-md-8 col-lg-9 bg-body-tertiary p-0 border-start border-secondary-subtle"
+        >
+          <!-- Message for when no conversation is selected -->
+          <div
+            *ngIf="selectedConversationId == -1"
+            class="d-flex justify-content-center align-items-center vh-100"
+          >
+            <div class="text-center">
+              <i class="bi bi-chat-dots fs-1"></i>
+              <h4>No conversation selected</h4>
+              <p>Click on a conversation or find<br />new user to start chat</p>
+            </div>
+          </div>
+
+          <!-- Conversation display -->
+          <div
+            *ngIf="selectedConversationId != -1"
+            class="vh-100 d-flex flex-column"
+          >
+            <div class="p-2 d-flex justify-content-between bg-body-secondary">
+              <div class="d-flex align-items-center justify-content-center">
+                <button (click)="onCloseChat()" class="btn py-0 me-1 d-sm-none">
+                  <i class="bi bi-list fs-4"></i>
+                </button>
+                <h4 class="m-0">{{ selectedConversationReceiverName }}</h4>
+              </div>
+              <button
+                class="btn btn-light"
+                data-bs-toggle="modal"
+                (click)="onDeleteConversation()"
+                data-bs-target="#deleteChatModal"
+              >
+                <i class="bi bi-trash-fill text-danger"></i> Delete Chat
               </button>
             </div>
-          </form>
+
+            <!-- Main conversation display area -->
+            <div class="main-flex-grow scrollarea p-2">
+              <div *ngFor="let m of selectedConversation" class="mt-2">
+                <div
+                  class="text-white rounded py-1 px-2 mw-75"
+                  [ngClass]="
+                    currentUser.userId == m.senderId
+                      ? 'float-end bg-primary-1 text-white'
+                      : 'float-start bg-secondary-subtle text-dark'
+                  "
+                >
+                  <div
+                    class="fs-6 word-break"
+                    [ngClass]="
+                      currentUser.userId == m.senderId
+                        ? 'text-white'
+                        : 'text-dark'
+                    "
+                  >
+                    {{ m.message }}
+                  </div>
+                  <div
+                    class="fs-7"
+                    [ngClass]="
+                      currentUser.userId == m.senderId
+                        ? 'float-end text-white-50'
+                        : 'float-start text-black-50'
+                    "
+                  >
+                    {{ m.timestamp | betterDate }}
+                  </div>
+                </div>
+                <div *ngIf="currentUser.userId == m.senderId">
+                  <i
+                    (click)="onDeleteMessage(m.messageId)"
+                    class="bi bi-trash text-danger p-2 cursor-pointer float-end opacity-hover"
+                  ></i>
+                </div>
+              </div>
+            </div>
+
+            <!-- Message input form -->
+            <div>
+              <form (submit)="onSendMessage()">
+                <div class="d-flex px-4 py-2 bg-body-secondary">
+                  <input
+                    class="form-control"
+                    type="text"
+                    name="message"
+                    placeholder="Type a message"
+                    [(ngModel)]="message"
+                  />
+                  <button type="submit" class="btn bg-primary-1 ms-2">
+                    <i class="bi bi-send text-white"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- Delete Chat Modal -->
-<div class="modal fade" id="deleteChatModal" tabindex="-1">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">
-          Delete conversation
-        </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        Are you sure about to delete this conversation?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cancel
-        </button>
-        <button
-          (click)="onDeleteConversation()"
-          type="button"
-          class="btn btn-danger"
-          data-bs-dismiss="modal"
-        >
-          Delete
-        </button>
+    <!-- Delete Chat Modal -->
+    <div class="modal fade" id="deleteChatModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Delete conversation
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            Are you sure about to delete this conversation?
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              (click)="onDeleteConversation()"
+              type="button"
+              class="btn btn-danger"
+              data-bs-dismiss="modal"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-<script
-src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-crossorigin="anonymous"
-></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>

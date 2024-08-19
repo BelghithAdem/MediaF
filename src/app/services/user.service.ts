@@ -13,7 +13,6 @@ export class UserService {
 
   constructor(private http: HttpClient) {}
 
-
   // Retrieve a list of all users except the currently logged-in user
   getAllUsersExceptCurrentUser(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(

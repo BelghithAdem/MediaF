@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
   selector: 'app-post-feed',
   templateUrl: './post-feed.component.html',
   styleUrls: ['./post-feed.component.css'],
-  providers: [BackApiService]
+  providers: [BackApiService],
 })
 export class PostFeedComponent implements OnInit {
   posts: PostModel[] = [];
@@ -20,12 +20,11 @@ export class PostFeedComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadPosts(); // Chargez les posts initialement
-
   }
   loadPosts() {
     this.backApiService.getAllPosts().subscribe((data) => {
       // Tri des posts par date de création (ordre décroissant)
-      this.posts = data; 
+      this.posts = data;
     });
   }
   openFileInput(event: Event) {
@@ -42,51 +41,51 @@ export class PostFeedComponent implements OnInit {
   createPost() {
     if (!this.caption || !this.imageFile) {
       Swal.fire({
-        position: "top-end",
-        icon: "error",
-        title: "Erreur lors de la création du post",
-        text:  "Une erreur s'est produite.",
+        position: 'top-end',
+        icon: 'error',
+        title: 'Erreur lors de la création du post',
+        text: "Une erreur s'est produite.",
         showConfirmButton: true,
         customClass: {
-          popup: 'my-popup-class' // Classe CSS personnalisée pour ajuster la taille de l'alerte
-        }
-      });   
-       return;
+          popup: 'my-popup-class', // Classe CSS personnalisée pour ajuster la taille de l'alerte
+        },
+      });
+      return;
     }
-  
+
     const postData = new FormData();
     postData.append('caption', this.caption);
     postData.append('mediaFile', this.imageFile);
-  
+
     // Utilisez postData ici pour envoyer les données du post au service
     this.backApiService.postCreate(postData).subscribe(
       (response: any) => {
         Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Post créé avec succès",
+          position: 'top-end',
+          icon: 'success',
+          title: 'Post créé avec succès',
           showConfirmButton: false,
-          timer: 1500
+          timer: 1500,
         });
         console.log('Post created successfully:', response);
         // Réinitialiser les champs après la création réussie du post
         this.caption = ''; // Réinitialiser le champ de texte
         this.imageFile = null; // Réinitialiser le champ de fichier
-  
+
         // Handle success, maybe redirect or show a success message
         // Rechargez les posts après avoir ajouté un nouveau post
         this.loadPosts();
       },
       (error: any) => {
         Swal.fire({
-          position: "top-end",
-          icon: "error",
-          title: "Erreur lors de la création du post",
+          position: 'top-end',
+          icon: 'error',
+          title: 'Erreur lors de la création du post',
           text: error.message || "Une erreur s'est produite.",
           showConfirmButton: true,
           customClass: {
-            popup: 'my-popup-class' // Classe CSS personnalisée pour ajuster la taille de l'alerte
-          }
+            popup: 'my-popup-class', // Classe CSS personnalisée pour ajuster la taille de l'alerte
+          },
         });
         console.error('Error creating post:', error);
         // Handle errors, show an error message to the user

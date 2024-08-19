@@ -7,7 +7,7 @@ import { UserModel } from 'src/app/models/user.model';
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
-  styleUrls: ['./test.component.css']
+  styleUrls: ['./test.component.css'],
 })
 export class TestComponent implements OnInit {
   posts: PostModel[] = [];
@@ -36,7 +36,7 @@ export class TestComponent implements OnInit {
       this.userconnected = parsedUser.userId;
     }
 
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       this.userId = params['userId'];
 
       if (this.userId !== undefined) {
@@ -49,7 +49,7 @@ export class TestComponent implements OnInit {
           console.log('Number of posts by user:', this.numberOfPosts);
           console.log('User to display:', this.userafficher);
           console.log('Logged in user:', this.userconnected);
-          
+
           // Moved the equality check here
           this.checkEquality();
         });
@@ -101,7 +101,6 @@ export class TestComponent implements OnInit {
     if (this.userafficher == this.userconnected) {
       this.isLinkDisabled = false;
       console.log('Result:', this.isLinkDisabled);
-
     }
   }
 }

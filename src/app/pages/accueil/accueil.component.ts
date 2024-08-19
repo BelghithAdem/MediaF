@@ -5,7 +5,7 @@ import { PostModel } from 'src/app/models/post';
 @Component({
   selector: 'app-accueil',
   templateUrl: './accueil.component.html',
-  styleUrls: ['./accueil.component.css']
+  styleUrls: ['./accueil.component.css'],
 })
 export class AccueilComponent implements OnInit {
   posts: PostModel[] = [];
@@ -15,7 +15,6 @@ export class AccueilComponent implements OnInit {
   ngOnInit(): void {
     this.backApiService.getAllPosts().subscribe((data) => {
       this.posts = data;
-
     });
   }
   isMenuOpen = false;
@@ -23,6 +22,4 @@ export class AccueilComponent implements OnInit {
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
   }
-
-  
 }

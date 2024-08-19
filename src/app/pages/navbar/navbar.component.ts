@@ -5,14 +5,14 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
   userId!: number;
   searchInput: string = ''; // Champs pour la recherche flexible
 
   searchResults: any[] = [];
-  constructor(private backApiService: BackApiService , private router: Router) {}
+  constructor(private backApiService: BackApiService, private router: Router) {}
 
   ngOnInit(): void {
     const userString = localStorage.getItem('user');
@@ -22,7 +22,6 @@ export class NavbarComponent implements OnInit {
     }
 
     this.searchUsers();
-
   }
 
   searchUsers() {
@@ -54,10 +53,10 @@ export class NavbarComponent implements OnInit {
   clickUserProfile(userId: number) {
     // Rediriger vers le profil de l'utilisateur
     this.router.navigate(['/profile', userId]);
-  
+
     // Vider le champ de recherche
     this.searchInput = '';
-  
+
     // Fermer la liste de recherche
     this.searchResults = [];
   }
@@ -67,14 +66,11 @@ export class NavbarComponent implements OnInit {
   toggleSettings() {
     this.isSettingsOpen = !this.isSettingsOpen;
     this.isMenuOpen = !this.isMenuOpen;
-
-}
+  }
   toggleLoginForm() {
     this.isLoginFormOpen = !this.isLoginFormOpen;
     this.isSettingsOpen = false; // Fermez les paramètres lorsque le formulaire de connexion est ouvert
   }
-
-
 
   signOut() {
     // Supprimer les données utilisateur stockées localement
@@ -85,5 +81,4 @@ export class NavbarComponent implements OnInit {
     // Remplacez 'connexion' par le chemin approprié de votre page de connexion
     window.location.href = '/connexion';
   }
-
 }

@@ -1,3 +1,3 @@
 export interface LoginRequest {
-    email: string;
+  email: string;
 }

@@ -25,10 +25,6 @@ import { BetterDatePipe } from './better-date.pipe';
 import { PostService } from './services/post.service';
 import { SettingsComponent } from './pages/settings/settings.component';
 
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,12 +39,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
     TestComponent,
     SidebarleftComponent,
     ChatComponent,
-   BetterDatePipe,
-   SettingsComponent
-  
- 
-   
-    
+    BetterDatePipe,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,10 +50,8 @@ import { SettingsComponent } from './pages/settings/settings.component';
     ReactiveFormsModule,
     MatCardModule,
     MatButtonModule,
-   
-    
   ],
-  providers: [BackApiService,StompService,UserService,PostService],
-  bootstrap: [AppComponent]
+  providers: [BackApiService, StompService, UserService, PostService],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

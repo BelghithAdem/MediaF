@@ -82,7 +82,7 @@ export class ChatComponent implements OnInit, OnDestroy {
 
   // When click logout button Then remove user from localStorage and navigate to homepage
   onUserLogout() {
-   // localStorage.removeItem('user');
+    // localStorage.removeItem('user');
     this.router.navigate(['/accueil']);
   }
 
